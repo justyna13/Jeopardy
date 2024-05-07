@@ -8,6 +8,9 @@ export const HomePageTemplate: React.FC<IHomePageTemplate> = ({testid}: IHomePag
   return (
     <div data-testid={testid}>
       home page
+      <div className="flex justify-center">
+        test tailwind
+      </div>
     </div>
   )
 }
