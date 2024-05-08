@@ -1,0 +1,32 @@
+.jeopardy-question-container {
+  width: 50vw;
+  height: 50vh;
+  padding: 0 4rem;
+  position: absolute;
+  left: calc(100vw - 75%);
+  top: 20%;
+  display: flex;
+  align-items: center;
+  background-color: blue;
+  border: 10px solid black;
+  z-index: 1;
+}
+
+.jeopardy-question {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  font-size: 2rem;
+  cursor: pointer;
+  height: 150px;
+  padding: 2rem;
+}
+
+.dollar-value {
+  font-size: 4rem;
+  background-color: blue;
+  color: rgb(215,160,75);
+  font-weight: 800;
+}

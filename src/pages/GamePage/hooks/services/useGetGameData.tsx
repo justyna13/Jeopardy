@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { IGetGameDataResponse, IRequestError } from "@/types/game";
+import { IGetGameDataResponse, IRequestError } from "@/types/api";
 import { getGameData } from "@/services/GameService.ts";
 
 export const useGetGameData = () => {

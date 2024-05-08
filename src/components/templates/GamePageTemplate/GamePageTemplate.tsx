@@ -1,6 +1,6 @@
 import React from "react";
 import { useGamePage } from "@/pages/GamePage/hooks/ui/useGamePage.tsx";
-import Board from "@/components/organisms/Board/Board.tsx";
+import { Board } from "@/components/organisms";
 
 interface IGamePageTemplate {
   testid?: string;

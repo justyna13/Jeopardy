@@ -33,7 +33,23 @@ export const mockResponseData: IGetGameDataResponse = {
           pointGroupId: '200'
         }
       ]
-    }
+    },
+    {
+      uid: 'third',
+      title: 'Third cat',
+      questions: [
+        {
+          uid: '2321',
+          title: 'Fav cat food?',
+          pointGroupId: '100'
+        },
+        {
+          uid: '12321',
+          title: 'Fav cat toy?',
+          pointGroupId: '200'
+        }
+      ]
+    },
   ],
   pointGroups: [
     {
