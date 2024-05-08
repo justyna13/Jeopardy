@@ -16,7 +16,7 @@ export type TCategory = {
   title: string
 }
 
-export interface IGetGameDataResponse {
+export type IGameData = {
   categories: Array<TCategory>,
   pointGroups: Array<TPoints>
 }

@@ -1,6 +1,6 @@
-import { IGetGameDataResponse } from "../src/types";
+import { IGetGameDataResponse } from "../src/types/api";
 
-export const responseData: IGetGameDataResponse = {
+export const mockResponseData: IGetGameDataResponse = {
   categories: [
     {
       uid: 'first',
