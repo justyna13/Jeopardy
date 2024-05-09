@@ -1,0 +1,16 @@
+input {
+  border: 1px solid $clr-input-border;
+  border-radius: 4px;
+  color: $clr-input-text;
+  font-weight: bold;
+  padding: 8px 12px;
+  outline: none;
+  width: 100%;
+  box-sizing: border-box;
+
+  &:active,
+  &:hover,
+  &:focus {
+    border: 1px solid $clr-input-border-focus;
+  }
+}

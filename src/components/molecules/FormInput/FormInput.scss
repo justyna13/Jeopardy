@@ -1,0 +1,16 @@
+.form-control {
+  margin-bottom: 24px;
+
+  .label-wr {
+    display: flex;
+    width: 100%;
+    margin-bottom: 6px;
+    justify-content: space-between;
+    font-size: .75rem;
+    .error-msg {
+      color: $clr-red;
+      font-weight: bold;
+    }
+  }
+
+}
