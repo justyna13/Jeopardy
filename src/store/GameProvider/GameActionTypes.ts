@@ -1,7 +1,8 @@
 import { TTeam } from '@/types/form';
 
 export enum GameActionTypes {
-  UPDATE_TEAMS = 'UPDATE_TEAMS'
+  UPDATE_TEAMS = 'UPDATE_TEAMS',
+  RESET_TEAMS = 'RESET_TEAMS'
 }
 
 export type TPayloadAction =
