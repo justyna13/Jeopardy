@@ -5,8 +5,8 @@ import { Button } from '@/components/atoms';
 import { Modal } from '@/components/molecules';
 import { NewGameForm } from '@/components/organisms';
 import { Slugs } from '@/constants';
-import { GameActionTypes } from "@/store/GameProvider/GameActionTypes.ts";
-import { useGameContext } from "@/store/GameProvider/GameContext.ts";
+import { GameActionTypes } from '@/store/GameProvider/GameActionTypes.ts';
+import { useGameContext } from '@/store/GameProvider/GameContext.ts';
 
 interface IHomePageTemplate {}
 
