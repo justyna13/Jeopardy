@@ -4,5 +4,5 @@ const withBasePath = (path: string) =>
 export const Slugs = {
   HOME: withBasePath('/'),
   GAME: withBasePath('/game'),
-  NOT_FOUND: '*',
-}
+  NOT_FOUND: '*'
+};

@@ -1,10 +1,11 @@
-import { createBrowserRouter, Navigate } from "react-router-dom";
+import { createBrowserRouter, Navigate } from 'react-router-dom';
 import { QueryParamProvider } from 'use-query-params';
-import { ReactRouter6Adapter } from "use-query-params/adapters/react-router-6";
-import { Layout } from "./pages/Layout/Layout.tsx";
-import { Slugs } from "./constants";
-import { HomePage } from "./pages/HomePage/HomePage.tsx";
-import { GamePage } from "./pages/GamePage/GamePage.tsx";
+import { ReactRouter6Adapter } from 'use-query-params/adapters/react-router-6';
+
+import { Slugs } from './constants';
+import { GamePage } from './pages/GamePage/GamePage.tsx';
+import { HomePage } from './pages/HomePage/HomePage.tsx';
+import { Layout } from './pages/Layout/Layout.tsx';
 
 export const router = createBrowserRouter([
   {
@@ -32,4 +33,4 @@ export const router = createBrowserRouter([
     path: Slugs.NOT_FOUND,
     element: <Navigate replace to={Slugs.HOME} />
   }
-])
+]);

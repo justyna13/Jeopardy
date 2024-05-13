@@ -1,4 +1,4 @@
-import React from 'react';
+import { memo } from 'react';
 import { RegisterOptions, UseFormRegisterReturn } from 'react-hook-form';
 import '@/components/atoms/Input/Input.scss';
 
@@ -12,7 +12,7 @@ interface IInput {
   disabled?: React.HTMLProps<HTMLInputElement>['disabled'];
 }
 
-export const Input: React.FC<IInput> = React.memo(
+export const Input: React.FC<IInput> = memo(
   ({
     register,
     name,
@@ -32,6 +32,9 @@ export const Input: React.FC<IInput> = React.memo(
         type={type}
         disabled={disabled}
         name={name}
+        className={
+          'shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline bg-white'
+        }
         placeholder={placeholder}
         {...isFormRegistered}
       />

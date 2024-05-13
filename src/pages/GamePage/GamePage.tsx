@@ -1,7 +1,5 @@
-import { GamePageTemplate } from "@/components/templates";
+import { GamePageTemplate } from '@/components/templates';
 
 export const GamePage = () => {
-  return (
-    <GamePageTemplate />
-  )
-}
+  return <GamePageTemplate />;
+};

@@ -1,8 +1,5 @@
-import { HomePageTemplate } from "@/components/templates";
-
+import { HomePageTemplate } from '@/components/templates';
 
 export const HomePage = () => {
-  return (
-    <HomePageTemplate />
-  )
-}
+  return <HomePageTemplate />;
+};

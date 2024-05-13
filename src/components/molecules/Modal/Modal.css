@@ -1,0 +1,37 @@
+/* scrol styles */
+#modal::-webkit-scrollbar {
+  height: 80%;
+  width: 0.25rem;
+  border-radius: 10px;
+}
+
+#modal::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+#modal::-webkit-scrollbar-thumb {
+  background: #888;
+  border-radius: 10px;
+}
+
+#modal::-webkit-scrollbar-thumb:hover {
+  background: #555;
+  border-radius: 10px;
+}
+
+.scrollShadow {
+  position: relative;
+}
+
+.scrollShadow::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  box-shadow: 0px 15px 25px rgba(0, 0, 0, 0.05);
+}
+
+[data-testid="right-side"]:has([id="modal"]) > [data-testid="header"] {
+  z-index: 1 !important;
+}

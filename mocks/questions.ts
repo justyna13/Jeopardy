@@ -1,4 +1,4 @@
-import { IGetGameDataResponse } from "../src/types/api";
+import { IGetGameDataResponse } from '../src/types/api';
 
 export const mockResponseData: IGetGameDataResponse = {
   categories: [
@@ -49,7 +49,7 @@ export const mockResponseData: IGetGameDataResponse = {
           pointGroupId: '200'
         }
       ]
-    },
+    }
   ],
   pointGroups: [
     {
@@ -63,4 +63,4 @@ export const mockResponseData: IGetGameDataResponse = {
       value: 200
     }
   ]
-}
+};

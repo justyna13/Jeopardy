@@ -1,6 +1,7 @@
-import { useQuery } from "@tanstack/react-query";
-import { IGetGameDataResponse, IRequestError } from "@/types/api";
-import { getGameData } from "@/services/GameService.ts";
+import { useQuery } from '@tanstack/react-query';
+
+import { getGameData } from '@/services/GameService.ts';
+import { IGetGameDataResponse, IRequestError } from '@/types/api';
 
 export const useGetGameData = () => {
   const {
@@ -16,5 +17,5 @@ export const useGetGameData = () => {
     gameData,
     gameError,
     refetchGameData
-  }
-}
+  };
+};
