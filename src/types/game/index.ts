@@ -8,6 +8,8 @@ export type TQuestion = {
   uid: string;
   title: string;
   point_group_uid: string;
+  content: string;
+  answer: string;
 };
 
 export type TCategory = {

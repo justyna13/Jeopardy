@@ -9,3 +9,10 @@ export interface IRequestError {
   message: string;
   error: string;
 }
+
+export interface IMqttPublishQuestionPayload {
+  category_title: string;
+  points: number;
+  question_content: string;
+  answer: string;
+}
