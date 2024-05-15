@@ -30,7 +30,7 @@ export const HomePageTemplate: React.FC<IHomePageTemplate> = () => {
   };
 
   return (
-    <div>
+    <div className="roboto-regular">
       {modalOpen ? (
         <Modal
           headerElem={<NewGameModalHeader />}

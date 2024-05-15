@@ -73,13 +73,13 @@ export const NewGameForm: React.FC<INewGameForm> = ({
           className="px-0 pt-6 mb-4 text-[#333]"
           onSubmit={methods.handleSubmit(saveTeams)}
           noValidate>
-          {state.teams.map((team) => (
+          {state.teams.map((team, i) => (
             <div key={`team-${team.uid}`}>
               <div className={'flex items-end justify-between'}>
                 <div className={'w-1/2'}>
                   <FormInput
                     id={`${team.uid}-name`}
-                    label="Nazwa grupy"
+                    label={`Nazwa grupy (${i + 1})`}
                     name={`${team.uid}name`}
                     type="text"
                     validationSchema={{ required: 'Pole wymagane' }}

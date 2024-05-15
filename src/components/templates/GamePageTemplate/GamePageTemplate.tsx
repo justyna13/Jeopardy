@@ -14,7 +14,7 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
   const { state } = useGameContext();
 
   return (
-    <div data-testid={testid} className={'flex gap-2'}>
+    <div data-testid={testid} className={'flex gap-2 roboto-regular'}>
       <div className={'w-[85%]'}>
         <Board testid={'game-page-board'} gameData={gameData} />
       </div>

@@ -13,7 +13,9 @@ export const Category: React.FC<ICategory> = ({
 }: ICategory) => {
   return (
     <div className="jeopardy-category">
-      <h2>{category.title}</h2>
+      <div className="flex justify-center items-center bg-[#2a3698] mb-1.5">
+        <h2>{category.title}</h2>
+      </div>
       {category.questions.map((question) => (
         <Question
           key={question.uid}
