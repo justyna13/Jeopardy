@@ -2,7 +2,7 @@ import { TCategory, TPoints } from '@/types/game';
 
 export interface IGetGameDataResponse {
   categories: Array<TCategory>;
-  pointGroups: Array<TPoints>;
+  point_groups: Array<TPoints>;
 }
 
 export interface IRequestError {

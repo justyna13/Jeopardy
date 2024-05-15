@@ -1,7 +1,6 @@
 import { useEffect, useState } from 'react';
 
-import { mockResponseData } from '../../../../../mocks/questions.ts';
-
+import { useGetGameData } from '@/pages/GamePage/hooks/services/useGetGameData.tsx';
 import { GameActionTypes } from '@/store/GameProvider/GameActionTypes.ts';
 import { useGameContext } from '@/store/GameProvider/GameContext.ts';
 import { TPoints, TQuestion } from '@/types/game';
@@ -10,8 +9,8 @@ export const useGamePage = () => {
   const [activeQuestion, setActiveQuestion] = useState<TQuestion | null>();
   const [activePointGroup, setActivePointGroup] = useState<TPoints | null>();
   const { state, dispatch } = useGameContext();
-  // const { gameData } = useGetGameData();
-  const gameData = mockResponseData;
+  const { gameData } = useGetGameData();
+  // const gameData = mockResponseData;
   const [questions, setQuestions] = useState<
     Array<TQuestion & { active: boolean }>
   >([]);
@@ -33,8 +32,10 @@ export const useGamePage = () => {
   }, [gameData]);
 
   const handleQuestionOpen = (question: TQuestion) => {
-    const activePointGroup = gameData.pointGroups.find(
-      (group) => group.uid === question.pointGroupId
+    if (!gameData) return;
+
+    const activePointGroup = gameData.point_groups.find(
+      (group) => group.uid === question.point_group_uid
     );
 
     setActivePointGroup(activePointGroup);

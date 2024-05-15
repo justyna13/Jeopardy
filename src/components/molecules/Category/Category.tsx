@@ -4,7 +4,7 @@ import './Category.style.scss';
 
 interface ICategory {
   category: TCategory;
-  pointGroups: Array<TPoints>;
+  point_groups: Array<TPoints>;
   questions: Array<TQuestion & { active: boolean }>;
   handleQuestionOpen: (question: TQuestion) => void;
   handleQuestionClose: () => void;
@@ -12,7 +12,7 @@ interface ICategory {
 
 export const Category: React.FC<ICategory> = ({
   category,
-  pointGroups,
+  point_groups,
   questions,
   handleQuestionOpen,
   handleQuestionClose
@@ -30,7 +30,7 @@ export const Category: React.FC<ICategory> = ({
           categoryTitle={category.title}
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}
-          pointGroups={pointGroups}
+          point_groups={point_groups}
         />
       ))}
     </div>

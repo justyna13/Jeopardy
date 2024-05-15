@@ -7,7 +7,7 @@ export type TPoints = {
 export type TQuestion = {
   uid: string;
   title: string;
-  pointGroupId: string;
+  point_group_uid: string;
 };
 
 export type TCategory = {
@@ -18,5 +18,5 @@ export type TCategory = {
 
 export type IGameData = {
   categories: Array<TCategory>;
-  pointGroups: Array<TPoints>;
+  point_groups: Array<TPoints>;
 };

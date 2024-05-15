@@ -17,7 +17,7 @@ export const Board: React.FC<IBoard> = ({
   handleQuestionOpen,
   handleQuestionClose
 }: IBoard) => {
-  const { categories, pointGroups } = gameData;
+  const { categories, point_groups } = gameData;
 
   return (
     <div
@@ -33,7 +33,7 @@ export const Board: React.FC<IBoard> = ({
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}
           category={category}
-          pointGroups={pointGroups}
+          point_groups={point_groups}
         />
       ))}
     </div>

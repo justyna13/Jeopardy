@@ -9,12 +9,12 @@ export const mockResponseData: IGetGameDataResponse = {
         {
           uid: '123',
           title: 'What is your name?',
-          pointGroupId: '100'
+          point_group_uid: '100'
         },
         {
           uid: '321',
           title: 'What is your age?',
-          pointGroupId: '200'
+          point_group_uid: '200'
         }
       ]
     },
@@ -25,12 +25,12 @@ export const mockResponseData: IGetGameDataResponse = {
         {
           uid: '232',
           title: 'Fav cat?',
-          pointGroupId: '100'
+          point_group_uid: '100'
         },
         {
           uid: '1232',
           title: 'Fav cat age?',
-          pointGroupId: '200'
+          point_group_uid: '200'
         }
       ]
     },
@@ -41,17 +41,17 @@ export const mockResponseData: IGetGameDataResponse = {
         {
           uid: '2321',
           title: 'Fav cat food?',
-          pointGroupId: '100'
+          point_group_uid: '100'
         },
         {
           uid: '12321',
           title: 'Fav cat toy?',
-          pointGroupId: '200'
+          point_group_uid: '200'
         }
       ]
     }
   ],
-  pointGroups: [
+  point_groups: [
     {
       uid: '100',
       label: '100',

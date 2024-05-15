@@ -6,7 +6,7 @@ import './Question.style.scss';
 
 interface IQuestion {
   data: TQuestion;
-  pointGroups: Array<TPoints>;
+  point_groups: Array<TPoints>;
   categoryTitle: string;
   questions: Array<TQuestion & { active: boolean }>;
   handleQuestionOpen: (question: TQuestion) => void;
@@ -16,15 +16,15 @@ interface IQuestion {
 export const Question: React.FC<IQuestion> = ({
   data,
   questions,
-  pointGroups,
+  point_groups,
   categoryTitle,
   handleQuestionOpen,
   handleQuestionClose
 }: IQuestion) => {
   const [isActive, setIsActive] = useState(true);
   const [open, setOpen] = useState(false);
-  const pointGroup = pointGroups.find(
-    (group) => group.uid === data.pointGroupId
+  const pointGroup = point_groups.find(
+    (group) => group.uid === data.point_group_uid
   );
 
   useEffect(() => {
