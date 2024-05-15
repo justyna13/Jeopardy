@@ -54,7 +54,8 @@ export const NewGameForm: React.FC<INewGameForm> = ({
 
       updatedTeams.push({
         name: fieldValue,
-        uid: team.uid
+        uid: team.uid,
+        points: team.points
       });
     });
 

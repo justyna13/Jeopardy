@@ -1,14 +1,18 @@
 import './Board.style.scss';
 import { Category } from '@/components/molecules';
-import { IGameData } from '@/types/game';
+import { IGameData, TQuestion } from '@/types/game';
 
 interface IBoard {
   testid?: string;
   gameData: IGameData;
-  handleQuestionOpen: (uid: string) => void;
+  handleQuestionOpen: (question: TQuestion) => void;
 }
 
-export const Board: React.FC<IBoard> = ({ testid, gameData, handleQuestionOpen }: IBoard) => {
+export const Board: React.FC<IBoard> = ({
+  testid,
+  gameData,
+  handleQuestionOpen
+}: IBoard) => {
   const { categories, pointGroups } = gameData;
 
   return (

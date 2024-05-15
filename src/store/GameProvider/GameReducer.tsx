@@ -9,7 +9,7 @@ export const gameReducer = (state: IGameState, action: GameAction) => {
     case GameActionTypes.UPDATE_TEAMS:
       return { ...state, teams: action.payload.teams };
     case GameActionTypes.RESET_TEAMS:
-      return { ...state, teams: [{ name: '', uid: 'team-1' }] };
+      return { ...state, teams: [{ name: '', uid: 'team-1', points: 0 }] };
     default:
       return { ...state };
   }

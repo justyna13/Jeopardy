@@ -1,11 +1,11 @@
 import { Question } from '@/components/molecules';
-import { TCategory, TPoints } from '@/types/game';
+import { TCategory, TPoints, TQuestion } from '@/types/game';
 import './Category.style.scss';
 
 interface ICategory {
   category: TCategory;
   pointGroups: Array<TPoints>;
-  handleQuestionOpen: (uid: string) => void;
+  handleQuestionOpen: (question: TQuestion) => void;
 }
 
 export const Category: React.FC<ICategory> = ({

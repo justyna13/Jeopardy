@@ -8,7 +8,13 @@ interface IGameProvider {
 }
 
 const initialState: IGameState = {
-  teams: [{ name: '', uid: 'team-1' }]
+  teams: [
+    {
+      name: '',
+      uid: 'team-1',
+      points: 0
+    }
+  ]
 };
 
 export const GameProvider: React.FC<IGameProvider> = ({

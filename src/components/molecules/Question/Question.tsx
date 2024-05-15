@@ -7,7 +7,7 @@ interface IQuestion {
   data: TQuestion;
   pointGroups: Array<TPoints>;
   categoryTitle: string;
-  handleQuestionOpen: (uid: string) => void;
+  handleQuestionOpen: (question: TQuestion) => void;
 }
 
 export const Question: React.FC<IQuestion> = ({
@@ -23,7 +23,7 @@ export const Question: React.FC<IQuestion> = ({
 
   const handleClick = () => {
     setOpen(!open);
-    handleQuestionOpen(data.uid);
+    handleQuestionOpen(data);
   };
 
   return (
