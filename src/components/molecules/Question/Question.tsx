@@ -62,7 +62,7 @@ export const Question: React.FC<IQuestion> = ({
             <Button
               className="ml-8"
               option="secondary"
-              onClick={() => handleClose(false)}>
+              onClick={() => handleClose()}>
               ESC
             </Button>
             <p>{categoryTitle}</p>
