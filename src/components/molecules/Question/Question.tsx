@@ -6,11 +6,13 @@ import './Question.style.scss';
 interface IQuestion {
   data: TQuestion;
   pointGroups: Array<TPoints>;
+  categoryTitle: string;
 }
 
 export const Question: React.FC<IQuestion> = ({
   data,
-  pointGroups
+  pointGroups,
+  categoryTitle
 }: IQuestion) => {
   const [open, setOpen] = useState(false);
   const pointGroup = pointGroups.find(
@@ -26,7 +28,17 @@ export const Question: React.FC<IQuestion> = ({
       className={open ? 'jeopardy-question' : 'jeopardy-question dollar-value'}
       onClick={handleClick}>
       {open ? (
-        <p className="jeopardy-question-container">{data.title}</p>
+        <div className="jeopardy-question-container">
+          <div className={'jeopardy-question-container-cat'}>
+            {categoryTitle}
+          </div>
+          <div
+            className={
+              'jeopardy-question-container-content text-[8rem] font-bold'
+            }>
+            {pointGroup ? pointGroup.label : ''}
+          </div>
+        </div>
       ) : (
         <p>{pointGroup ? pointGroup.label : ''}</p>
       )}

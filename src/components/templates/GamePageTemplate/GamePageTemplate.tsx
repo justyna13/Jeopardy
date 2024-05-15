@@ -15,7 +15,7 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
 
   return (
     <div data-testid={testid} className={'flex gap-2 roboto-regular'}>
-      <div className={'w-[85%]'}>
+      <div className={'w-[85%] bg-[#2a3698]'}>
         <Board testid={'game-page-board'} gameData={gameData} />
       </div>
 

@@ -20,6 +20,7 @@ export const Category: React.FC<ICategory> = ({
         <Question
           key={question.uid}
           data={question}
+          categoryTitle={category.title}
           pointGroups={pointGroups}
         />
       ))}
