@@ -33,8 +33,18 @@
   padding: 2rem;
   border: 6px solid $clr-border;
 
-  &:hover {
+  &.disabled {
+    cursor: default;
+    opacity: .5;
+  }
+
+  &:not(.disabled):hover {
     border-color: $clr-border-hover;
+  }
+
+  &:hover {
+
+    border-color: $clr-disabled;
   }
 }
 

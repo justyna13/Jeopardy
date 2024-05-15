@@ -1,5 +1,4 @@
-// import { useGetGameData } from "@/pages/GamePage/hooks/services/useGetGameData.tsx";
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 import { mockResponseData } from '../../../../../mocks/questions.ts';
 
@@ -13,6 +12,25 @@ export const useGamePage = () => {
   const { state, dispatch } = useGameContext();
   // const { gameData } = useGetGameData();
   const gameData = mockResponseData;
+  const [questions, setQuestions] = useState<
+    Array<TQuestion & { active: boolean }>
+  >([]);
+
+  useEffect(() => {
+    if (gameData) {
+      const allQuestions: Array<TQuestion & { active: boolean }> = [];
+      gameData.categories.map((category) => {
+        category.questions.map((question) => {
+          allQuestions.push({
+            ...question,
+            active: true
+          });
+        });
+      });
+
+      setQuestions(allQuestions);
+    }
+  }, [gameData]);
 
   const handleQuestionOpen = (question: TQuestion) => {
     const activePointGroup = gameData.pointGroups.find(
@@ -21,6 +39,11 @@ export const useGamePage = () => {
 
     setActivePointGroup(activePointGroup);
     setActiveQuestion(question);
+  };
+
+  const handleQuestionClose = () => {
+    setActiveQuestion(null);
+    setActivePointGroup(null);
   };
 
   const addPointsForTeam = (teamUid: string) => {
@@ -39,6 +62,16 @@ export const useGamePage = () => {
     dispatch({
       type: GameActionTypes.UPDATE_TEAMS,
       payload: { teams: updatedTeams }
+    });
+
+    // set question as answered
+    setQuestions((prevState) => {
+      const searchedIndex = prevState.findIndex(
+        (question) => question.uid === activeQuestion?.uid
+      );
+      prevState[searchedIndex].active = false;
+
+      return prevState;
     });
   };
 
@@ -64,8 +97,10 @@ export const useGamePage = () => {
   return {
     teams: state.teams,
     gameData,
+    questions,
     handleQuestionOpen,
     addPointsForTeam,
-    removePointsForTeam
+    removePointsForTeam,
+    handleQuestionClose
   };
 };

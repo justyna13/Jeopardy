@@ -14,10 +14,16 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
   const {
     gameData,
     teams,
+    questions,
     handleQuestionOpen,
+    handleQuestionClose,
     addPointsForTeam,
     removePointsForTeam
   } = useGamePage();
+
+  const handleCorrectAnswer = (teamUid: string) => {
+    addPointsForTeam(teamUid);
+  };
 
   return (
     <div data-testid={testid} className={'flex gap-2 roboto-regular'}>
@@ -25,7 +31,9 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
         <Board
           testid={'game-page-board'}
           gameData={gameData}
+          questions={questions}
           handleQuestionOpen={handleQuestionOpen}
+          handleQuestionClose={handleQuestionClose}
         />
       </div>
 
@@ -43,7 +51,7 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
             <div className="flex items-center justify-center gap-8 my-4">
               <PlusIcon
                 className="size-7 text-white cursor-pointer"
-                onClick={() => addPointsForTeam(team.uid)}
+                onClick={() => handleCorrectAnswer(team.uid)}
               />
               <MinusIcon
                 className="size-7 text-white cursor-pointer"

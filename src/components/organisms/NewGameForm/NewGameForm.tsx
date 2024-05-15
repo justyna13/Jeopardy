@@ -22,7 +22,10 @@ export const NewGameForm: React.FC<INewGameForm> = ({
   const addNewTeam = () => {
     if (state.teams.length >= teamsLimit) return;
 
-    const updatedTeams = [...state.teams, { name: '', uid: `team-${nextUid}` }];
+    const updatedTeams: Array<TTeam> = [
+      ...state.teams,
+      { name: '', uid: `team-${nextUid}`, points: 0 }
+    ];
 
     dispatch({
       type: GameActionTypes.UPDATE_TEAMS,

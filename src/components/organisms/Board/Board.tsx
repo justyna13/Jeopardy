@@ -5,13 +5,17 @@ import { IGameData, TQuestion } from '@/types/game';
 interface IBoard {
   testid?: string;
   gameData: IGameData;
+  questions: Array<TQuestion & { active: boolean }>;
   handleQuestionOpen: (question: TQuestion) => void;
+  handleQuestionClose: () => void;
 }
 
 export const Board: React.FC<IBoard> = ({
   testid,
   gameData,
-  handleQuestionOpen
+  questions,
+  handleQuestionOpen,
+  handleQuestionClose
 }: IBoard) => {
   const { categories, pointGroups } = gameData;
 
@@ -25,7 +29,9 @@ export const Board: React.FC<IBoard> = ({
       {categories.map((category) => (
         <Category
           key={category.uid}
+          questions={questions}
           handleQuestionOpen={handleQuestionOpen}
+          handleQuestionClose={handleQuestionClose}
           category={category}
           pointGroups={pointGroups}
         />
