@@ -5,11 +5,13 @@ import './Category.style.scss';
 interface ICategory {
   category: TCategory;
   pointGroups: Array<TPoints>;
+  handleQuestionOpen: (uid: string) => void;
 }
 
 export const Category: React.FC<ICategory> = ({
   category,
-  pointGroups
+  pointGroups,
+  handleQuestionOpen
 }: ICategory) => {
   return (
     <div className="jeopardy-category">
@@ -21,6 +23,7 @@ export const Category: React.FC<ICategory> = ({
           key={question.uid}
           data={question}
           categoryTitle={category.title}
+          handleQuestionOpen={handleQuestionOpen}
           pointGroups={pointGroups}
         />
       ))}

@@ -5,7 +5,12 @@ export const useGamePage = () => {
   // const { gameData } = useGetGameData();
   const gameData = mockResponseData;
 
+  const handleQuestionOpen = (uid: string) => {
+    console.log(uid)
+  }
+
   return {
-    gameData
+    gameData,
+    handleQuestionOpen
   };
 };
