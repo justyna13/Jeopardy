@@ -70,7 +70,7 @@ export const Question: React.FC<IQuestion> = ({
           </div>
           <div
             className={
-              'jeopardy-question-container-content text-[8rem] font-bold'
+              'jeopardy-question-container-content text-[4rem] font-bold mx-4'
             }>
             {pointGroup ? pointGroup.label : ''}
           </div>

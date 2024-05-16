@@ -49,18 +49,16 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
         {teams.map((team: TTeam) => (
           <div
             key={team.uid}
-            className="text-center text-surface shadow-secondary-1 border-b-2 border-neutral-300 mt-2 pt-2">
-            <h5 className="mb-2 text-xl font-medium leading-tight px-6">
+            className="text-center text-surface shadow-secondary-1 border-b-2 border-neutral-300 mt-2 pt-2 relative">
+            <h5 className="mb-2 text-xl font-medium leading-tight px-6 pt-2">
               {team.name}
             </h5>
-            <div className="">
-              <p className="mb-4 text-3xl font-bold">{team.points}</p>
-            </div>
             <div className="flex items-center justify-center gap-8 my-4">
               <PlusIcon
                 className="size-7 text-white cursor-pointer"
                 onClick={() => handleCorrectAnswer(team.uid)}
               />
+              <p className="text-3xl font-bold w-[5ch]">{team.points}</p>
               <MinusIcon
                 className="size-7 text-white cursor-pointer"
                 onClick={() => removePointsForTeam(team.uid)}
