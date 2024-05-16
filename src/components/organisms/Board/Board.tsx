@@ -4,6 +4,7 @@ import { IGameData, TQuestion } from '@/types/game';
 
 interface IBoard {
   testid?: string;
+  timer: number;
   gameData: IGameData;
   questions: Array<TQuestion & { active: boolean }>;
   handleQuestionOpen: (question: TQuestion) => void;
@@ -14,6 +15,7 @@ export const Board: React.FC<IBoard> = ({
   testid,
   gameData,
   questions,
+  timer,
   handleQuestionOpen,
   handleQuestionClose
 }: IBoard) => {
@@ -30,6 +32,7 @@ export const Board: React.FC<IBoard> = ({
         <Category
           key={category.uid}
           questions={questions}
+          timer={timer}
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}
           category={category}

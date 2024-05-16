@@ -12,6 +12,7 @@ interface IQuestion {
   questions: Array<TQuestion & { active: boolean }>;
   handleQuestionOpen: (question: TQuestion) => void;
   handleQuestionClose: () => void;
+  timer: number;
 }
 
 export const Question: React.FC<IQuestion> = ({
@@ -19,6 +20,7 @@ export const Question: React.FC<IQuestion> = ({
   questions,
   point_groups,
   categoryTitle,
+  timer,
   handleQuestionOpen,
   handleQuestionClose
 }: IQuestion) => {
@@ -75,7 +77,7 @@ export const Question: React.FC<IQuestion> = ({
             className={
               'jeopardy-question-container-content text-[4rem] font-bold mx-4 flex flex-col gap-14'
             }>
-            <CountdownTimer />
+            <CountdownTimer duration={timer} isPlaying={false} />
             <div>Team 1</div>
           </div>
         </div>

@@ -15,11 +15,14 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
     gameData,
     teams,
     questions,
+    gameConfig,
     handleQuestionOpen,
     handleQuestionClose,
     addPointsForTeam,
     removePointsForTeam
   } = useGamePage();
+
+  const defaultTimerValue = 30;
 
   const handleCorrectAnswer = (teamUid: string) => {
     addPointsForTeam(teamUid);
@@ -33,6 +36,9 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
         <Board
           testid={'game-page-board'}
           gameData={gameData}
+          timer={
+            gameConfig.timer ? parseInt(gameConfig.timer) : defaultTimerValue
+          }
           questions={questions}
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}

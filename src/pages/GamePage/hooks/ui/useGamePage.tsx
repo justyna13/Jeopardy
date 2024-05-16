@@ -162,6 +162,7 @@ export const useGamePage = () => {
     teams: state.teams,
     gameData,
     questions,
+    gameConfig,
     handleQuestionOpen,
     addPointsForTeam,
     removePointsForTeam,
