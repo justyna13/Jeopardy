@@ -9,6 +9,7 @@ interface IBoard {
   questions: Array<TQuestion & { active: boolean }>;
   handleQuestionOpen: (question: TQuestion) => void;
   handleQuestionClose: () => void;
+  isTimerActive: boolean;
 }
 
 export const Board: React.FC<IBoard> = ({
@@ -16,6 +17,7 @@ export const Board: React.FC<IBoard> = ({
   gameData,
   questions,
   timer,
+  isTimerActive,
   handleQuestionOpen,
   handleQuestionClose
 }: IBoard) => {
@@ -36,6 +38,7 @@ export const Board: React.FC<IBoard> = ({
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}
           category={category}
+          isTimerActive={isTimerActive}
           point_groups={point_groups}
         />
       ))}

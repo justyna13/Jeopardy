@@ -9,6 +9,7 @@ interface ICategory {
   handleQuestionOpen: (question: TQuestion) => void;
   handleQuestionClose: () => void;
   timer: number;
+  isTimerActive: boolean;
 }
 
 export const Category: React.FC<ICategory> = ({
@@ -16,6 +17,7 @@ export const Category: React.FC<ICategory> = ({
   point_groups,
   questions,
   timer,
+  isTimerActive,
   handleQuestionOpen,
   handleQuestionClose
 }: ICategory) => {
@@ -31,6 +33,7 @@ export const Category: React.FC<ICategory> = ({
           questions={questions}
           timer={timer}
           categoryTitle={category.title}
+          isTimerActive={isTimerActive}
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}
           point_groups={point_groups}

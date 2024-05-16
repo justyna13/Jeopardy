@@ -24,6 +24,9 @@ export const useGamePage = () => {
 
   const [activeQuestion, setActiveQuestion] = useState<TQuestion | null>();
   const [activePointGroup, setActivePointGroup] = useState<TPoints | null>();
+  const [isTimerActive, setIsTimerActive] = useState(false);
+  // const [activeTeam, setActiveTeam] = useState<TTeam | null>(null);
+
   const { state, dispatch } = useGameContext();
   const { gameData } = useGetGameData(gameConfig.backendAddress);
 
@@ -53,22 +56,7 @@ export const useGamePage = () => {
     }
   }, [gameData]);
 
-  useEffect(() => {
-    if (gameConfig && gameConfig.mqttAddress.length) {
-      startMqttConnection();
-    }
-  }, [gameConfig]);
-
-  useEffect(() => {
-    if (localStorage.getItem('gameConfig')) {
-      const newGameConfig = JSON.parse(
-        localStorage.getItem('gameConfig') ?? ''
-      );
-      setGameConfig(newGameConfig);
-    }
-  }, []);
-
-  // mqtt
+  // mqtt functions
   const connectToMqtt = (
     mqttOption: mqtt.IClientOptions | undefined = undefined
   ) => {
@@ -80,10 +68,44 @@ export const useGamePage = () => {
     client.publish(topic, JSON.stringify(payload));
   };
 
+  const mqttSub = (topic: string) => {
+    if (!client) return;
+    client.subscribe(topic);
+  };
+
   const startMqttConnection = () => {
     connectToMqtt();
   };
-  // end mqtt
+  // end mqtt functions
+
+  useEffect(() => {
+    if (gameConfig && gameConfig.mqttAddress.length) {
+      startMqttConnection();
+    }
+
+    if (localStorage.getItem('gameConfig')) {
+      const newGameConfig = JSON.parse(
+        localStorage.getItem('gameConfig') ?? ''
+      );
+      setGameConfig(newGameConfig);
+    }
+  }, [gameData]);
+
+  useEffect(() => {
+    if (!client) return;
+
+    client.on('connect', () => {
+      mqttSub('quiz/triggered');
+    });
+
+    client.on('message', (topic, message) => {
+      if (topic === 'quiz/triggered') {
+        const msg: { first_btn_num: number } = JSON.parse(message.toString());
+        setIsTimerActive(msg.first_btn_num !== -1);
+        //   todo: set active team
+      }
+    });
+  }, [client]);
 
   const handleQuestionOpen = (question: TQuestion) => {
     if (!gameData) return;
@@ -163,6 +185,7 @@ export const useGamePage = () => {
     gameData,
     questions,
     gameConfig,
+    isTimerActive,
     handleQuestionOpen,
     addPointsForTeam,
     removePointsForTeam,

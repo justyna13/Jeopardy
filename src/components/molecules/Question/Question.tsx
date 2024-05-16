@@ -13,6 +13,7 @@ interface IQuestion {
   handleQuestionOpen: (question: TQuestion) => void;
   handleQuestionClose: () => void;
   timer: number;
+  isTimerActive: boolean;
 }
 
 export const Question: React.FC<IQuestion> = ({
@@ -21,6 +22,7 @@ export const Question: React.FC<IQuestion> = ({
   point_groups,
   categoryTitle,
   timer,
+  isTimerActive,
   handleQuestionOpen,
   handleQuestionClose
 }: IQuestion) => {
@@ -48,6 +50,10 @@ export const Question: React.FC<IQuestion> = ({
     handleQuestionClose();
   };
 
+  const handleCorrectAnswerManual = () => {
+    //   todo
+  };
+
   return (
     <div
       onClick={handleClick}
@@ -71,13 +77,19 @@ export const Question: React.FC<IQuestion> = ({
             <p>
               {categoryTitle} - <b>{pointGroup ? pointGroup.label : ''}</b>
             </p>
-            <div className="ml-8 w-[60px]"></div>
+            <Button
+              className="mr-8"
+              option="secondary"
+              onClick={handleCorrectAnswerManual}>
+              Poprawna odp
+            </Button>
           </div>
           <div
             className={
               'jeopardy-question-container-content text-[4rem] font-bold mx-4 flex flex-col gap-14'
             }>
-            <CountdownTimer duration={timer} isPlaying={false} />
+            {isTimerActive}
+            <CountdownTimer duration={timer} isPlaying={isTimerActive} />
             <div>Team 1</div>
           </div>
         </div>
