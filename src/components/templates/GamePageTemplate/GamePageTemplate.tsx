@@ -20,6 +20,7 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
     activeTeam,
     handleQuestionOpen,
     handleQuestionClose,
+    handleSkipAnswer,
     addPointsForTeam,
     removePointsForTeam
   } = useGamePage();
@@ -46,6 +47,7 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
           activeTeam={activeTeam}
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}
+          handleSkipAnswer={handleSkipAnswer}
         />
       </div>
 

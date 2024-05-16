@@ -5,7 +5,6 @@ import { useGetGameData } from '@/pages/GamePage/hooks/services/useGetGameData.t
 import { useMarkQuestionShown } from '@/pages/GamePage/hooks/services/useMarkQuestionShown.tsx';
 import { GameActionTypes } from '@/store/GameProvider/GameActionTypes.ts';
 import { useGameContext } from '@/store/GameProvider/GameContext.ts';
-import { IMqttPublishQuestionPayload } from '@/types/api';
 import { IFormConfig, TTeam } from '@/types/form';
 import { TPoints, TQuestion } from '@/types/game';
 
@@ -63,7 +62,7 @@ export const useGamePage = () => {
     setClient(mqtt.connect(gameConfig.mqttAddress, mqttOption));
   };
 
-  const mqttPub = (topic: string, payload: IMqttPublishQuestionPayload) => {
+  const mqttPub = (topic: string, payload: Object) => {
     if (!client) return;
     client.publish(topic, JSON.stringify(payload));
   };
@@ -107,6 +106,10 @@ export const useGamePage = () => {
           (team) => String(team.deviceUid) === String(msg.first_btn_num)
         );
         setActiveTeam(team ?? null);
+
+        mqttPub('quiz/selected_team', {
+          team: team ?? null
+        });
       }
     });
   }, [client]);
@@ -125,6 +128,13 @@ export const useGamePage = () => {
       answer: question.answer
     });
 
+    mqttPub('quiz/command', {
+      command: 'clear',
+      args: {
+        arm: true
+      }
+    });
+
     setActivePointGroup(activePointGroup);
     setActiveQuestion(question);
 
@@ -134,6 +144,27 @@ export const useGamePage = () => {
   const handleQuestionClose = () => {
     setActiveQuestion(null);
     setActivePointGroup(null);
+
+    mqttPub('quiz/command', {
+      command: 'clear',
+      args: {
+        arm: false
+      }
+    });
+  };
+
+  const handleSkipAnswer = () => {
+    // set question as answered
+    setQuestions((prevState) => {
+      const searchedIndex = prevState.findIndex(
+        (question) => question.uid === activeQuestion?.uid
+      );
+      prevState[searchedIndex].active = false;
+
+      return prevState;
+    });
+
+    handleQuestionClose();
   };
 
   const addPointsForTeam = (teamUid: string) => {
@@ -191,9 +222,10 @@ export const useGamePage = () => {
     gameConfig,
     isTimerActive,
     activeTeam,
-    handleQuestionOpen,
     addPointsForTeam,
     removePointsForTeam,
-    handleQuestionClose
+    handleQuestionOpen,
+    handleQuestionClose,
+    handleSkipAnswer
   };
 };

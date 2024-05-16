@@ -13,6 +13,7 @@ interface IQuestion {
   questions: Array<TQuestion & { active: boolean }>;
   handleQuestionOpen: (question: TQuestion) => void;
   handleQuestionClose: () => void;
+  handleSkipAnswer: () => void;
   timer: number;
   isTimerActive: boolean;
   activeTeam: TTeam | null;
@@ -27,7 +28,8 @@ export const Question: React.FC<IQuestion> = ({
   isTimerActive,
   activeTeam,
   handleQuestionOpen,
-  handleQuestionClose
+  handleQuestionClose,
+  handleSkipAnswer
 }: IQuestion) => {
   const [isActive, setIsActive] = useState(true);
   const [open, setOpen] = useState(false);
@@ -53,8 +55,9 @@ export const Question: React.FC<IQuestion> = ({
     handleQuestionClose();
   };
 
-  const handleCorrectAnswerManual = () => {
-    //   todo
+  const handleClickSkip = () => {
+    setOpen(false);
+    handleSkipAnswer();
   };
 
   return (
@@ -83,8 +86,8 @@ export const Question: React.FC<IQuestion> = ({
             <Button
               className="mr-8"
               option="secondary"
-              onClick={handleCorrectAnswerManual}>
-              Poprawna odp
+              onClick={handleClickSkip}>
+              Pomiń odp
             </Button>
           </div>
           <div
@@ -95,6 +98,7 @@ export const Question: React.FC<IQuestion> = ({
             <CountdownTimer duration={timer} isPlaying={isTimerActive} />
             <div className={'h-3'}>{activeTeam ? activeTeam.name : ''}</div>
           </div>
+          <div className="absolute left-2 bottom-2 text-xs">{data.uid}</div>
         </div>
       ) : (
         <p>{pointGroup ? pointGroup.label : ''}</p>

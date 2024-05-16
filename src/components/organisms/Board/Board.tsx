@@ -9,6 +9,7 @@ interface IBoard {
   gameData: IGameData;
   questions: Array<TQuestion & { active: boolean }>;
   handleQuestionOpen: (question: TQuestion) => void;
+  handleSkipAnswer: () => void;
   handleQuestionClose: () => void;
   isTimerActive: boolean;
   activeTeam: TTeam | null;
@@ -22,7 +23,8 @@ export const Board: React.FC<IBoard> = ({
   activeTeam,
   isTimerActive,
   handleQuestionOpen,
-  handleQuestionClose
+  handleQuestionClose,
+  handleSkipAnswer
 }: IBoard) => {
   const { categories, point_groups } = gameData;
 
@@ -39,6 +41,7 @@ export const Board: React.FC<IBoard> = ({
           questions={questions}
           timer={timer}
           activeTeam={activeTeam}
+          handleSkipAnswer={handleSkipAnswer}
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}
           category={category}
