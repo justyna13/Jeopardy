@@ -2,6 +2,7 @@ export type TTeam = {
   uid: string;
   name: string;
   points: number;
+  deviceUid: string;
 };
 
 export type IForm = {
@@ -16,3 +17,8 @@ export type IFormConfig = {
   mqttAddress: string;
   backendAddress: string;
 };
+
+export interface IOption {
+  label: string;
+  value: string;
+}

@@ -1,4 +1,5 @@
 import { Question } from '@/components/molecules';
+import { TTeam } from '@/types/form';
 import { TCategory, TPoints, TQuestion } from '@/types/game';
 import './Category.style.scss';
 
@@ -10,6 +11,7 @@ interface ICategory {
   handleQuestionClose: () => void;
   timer: number;
   isTimerActive: boolean;
+  activeTeam: TTeam | null;
 }
 
 export const Category: React.FC<ICategory> = ({
@@ -17,6 +19,7 @@ export const Category: React.FC<ICategory> = ({
   point_groups,
   questions,
   timer,
+  activeTeam,
   isTimerActive,
   handleQuestionOpen,
   handleQuestionClose
@@ -32,6 +35,7 @@ export const Category: React.FC<ICategory> = ({
           data={question}
           questions={questions}
           timer={timer}
+          activeTeam={activeTeam}
           categoryTitle={category.title}
           isTimerActive={isTimerActive}
           handleQuestionOpen={handleQuestionOpen}

@@ -2,10 +2,11 @@ import { useState } from 'react';
 import { FormProvider, useForm } from 'react-hook-form';
 
 import { Button } from '@/components/atoms';
+import { FormSelect } from '@/components/molecules';
 import { FormInput } from '@/components/molecules/FormInput/FormInput.tsx';
 import { GameActionTypes } from '@/store/GameProvider/GameActionTypes.ts';
 import { useGameContext } from '@/store/GameProvider/GameContext.ts';
-import { IForm, IFormConfig, TTeam } from '@/types/form';
+import { IForm, IFormConfig, IOption, TTeam } from '@/types/form';
 
 interface INewGameForm {
   handleGameStarted: () => void;
@@ -31,13 +32,23 @@ export const NewGameForm: React.FC<INewGameForm> = ({
   });
   const { state, dispatch } = useGameContext();
   const teamsLimit = 8;
+  const devicesOptions: IOption[] = [
+    { label: '0', value: '0' },
+    { label: '1', value: '1' },
+    { label: '2', value: '2' },
+    { label: '3', value: '3' },
+    { label: '4', value: '4' },
+    { label: '5', value: '5' },
+    { label: '6', value: '6' },
+    { label: '7', value: '7' }
+  ];
 
   const addNewTeam = () => {
     if (state.teams.length >= teamsLimit) return;
 
     const updatedTeams: Array<TTeam> = [
       ...state.teams,
-      { name: '', uid: `team-${nextUid}`, points: 0 }
+      { name: '', uid: `team-${nextUid}`, points: 0, deviceUid: '' }
     ];
 
     dispatch({
@@ -65,13 +76,19 @@ export const NewGameForm: React.FC<INewGameForm> = ({
     const form = methods.getValues();
     state.teams.map((team) => {
       const fieldName = `${team.uid}name`;
+      const fieldDeviceUid = `${team.uid}deviceId`;
+
       // @ts-expect-error todo
-      const fieldValue = form[fieldName];
+      const nameValue = form[fieldName];
+
+      // @ts-expect-error todo
+      const deviceValue = form[fieldDeviceUid];
 
       updatedTeams.push({
-        name: fieldValue,
+        name: nameValue,
         uid: team.uid,
-        points: team.points
+        points: team.points,
+        deviceUid: deviceValue
       });
     });
 
@@ -133,21 +150,28 @@ export const NewGameForm: React.FC<INewGameForm> = ({
           </label>
           {state.teams.map((team) => (
             <div key={`team-${team.uid}`}>
-              <div className={'flex items-end justify-between'}>
+              <div className={'flex items-end gap-4'}>
                 <div className={'w-1/2'}>
                   <FormInput
                     id={`${team.uid}-name`}
                     name={`${team.uid}name`}
                     type="text"
                     validationSchema={{ required: 'Pole wymagane' }}
-                    placeholder=""
+                    placeholder="Nazwa grupy"
+                  />
+                </div>
+                <div className="w-1/4">
+                  <FormSelect
+                    name={`${team.uid}deviceId`}
+                    options={devicesOptions}
+                    placeholder="Przycisk"
                   />
                 </div>
                 {state.teams.length > 1 && (
                   <Button
                     testid={'remove-team'}
                     className={
-                      'text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2  dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 form-control'
+                      'text-red-700 hover:text-white border border-red-700 hover:bg-red-800 focus:outline-none font-medium rounded-lg text-sm px-5 py-2.5 text-center me-2  dark:border-red-500 dark:text-red-500 dark:hover:text-white dark:hover:bg-red-600 form-control ml-auto'
                     }
                     onClick={() => removeTeam(team.uid)}>
                     Usuń

@@ -6,7 +6,7 @@ import { useMarkQuestionShown } from '@/pages/GamePage/hooks/services/useMarkQue
 import { GameActionTypes } from '@/store/GameProvider/GameActionTypes.ts';
 import { useGameContext } from '@/store/GameProvider/GameContext.ts';
 import { IMqttPublishQuestionPayload } from '@/types/api';
-import { IFormConfig } from '@/types/form';
+import { IFormConfig, TTeam } from '@/types/form';
 import { TPoints, TQuestion } from '@/types/game';
 
 export const useGamePage = () => {
@@ -25,7 +25,7 @@ export const useGamePage = () => {
   const [activeQuestion, setActiveQuestion] = useState<TQuestion | null>();
   const [activePointGroup, setActivePointGroup] = useState<TPoints | null>();
   const [isTimerActive, setIsTimerActive] = useState(false);
-  // const [activeTeam, setActiveTeam] = useState<TTeam | null>(null);
+  const [activeTeam, setActiveTeam] = useState<TTeam | null>(null);
 
   const { state, dispatch } = useGameContext();
   const { gameData } = useGetGameData(gameConfig.backendAddress);
@@ -102,7 +102,11 @@ export const useGamePage = () => {
       if (topic === 'quiz/triggered') {
         const msg: { first_btn_num: number } = JSON.parse(message.toString());
         setIsTimerActive(msg.first_btn_num !== -1);
-        //   todo: set active team
+
+        const team = state.teams.find(
+          (team) => String(team.deviceUid) === String(msg.first_btn_num)
+        );
+        setActiveTeam(team ?? null);
       }
     });
   }, [client]);
@@ -186,6 +190,7 @@ export const useGamePage = () => {
     questions,
     gameConfig,
     isTimerActive,
+    activeTeam,
     handleQuestionOpen,
     addPointsForTeam,
     removePointsForTeam,

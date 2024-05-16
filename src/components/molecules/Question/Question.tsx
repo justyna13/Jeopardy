@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/atoms';
 import { CountdownTimer } from '@/components/molecules';
+import { TTeam } from '@/types/form';
 import { TPoints, TQuestion } from '@/types/game';
 import './Question.style.scss';
 
@@ -14,6 +15,7 @@ interface IQuestion {
   handleQuestionClose: () => void;
   timer: number;
   isTimerActive: boolean;
+  activeTeam: TTeam | null;
 }
 
 export const Question: React.FC<IQuestion> = ({
@@ -23,6 +25,7 @@ export const Question: React.FC<IQuestion> = ({
   categoryTitle,
   timer,
   isTimerActive,
+  activeTeam,
   handleQuestionOpen,
   handleQuestionClose
 }: IQuestion) => {
@@ -90,7 +93,7 @@ export const Question: React.FC<IQuestion> = ({
             }>
             {isTimerActive}
             <CountdownTimer duration={timer} isPlaying={isTimerActive} />
-            <div>Team 1</div>
+            <div className={'h-3'}>{activeTeam ? activeTeam.name : ''}</div>
           </div>
         </div>
       ) : (

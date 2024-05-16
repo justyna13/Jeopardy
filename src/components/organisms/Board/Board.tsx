@@ -1,5 +1,6 @@
 import './Board.style.scss';
 import { Category } from '@/components/molecules';
+import { TTeam } from '@/types/form';
 import { IGameData, TQuestion } from '@/types/game';
 
 interface IBoard {
@@ -10,6 +11,7 @@ interface IBoard {
   handleQuestionOpen: (question: TQuestion) => void;
   handleQuestionClose: () => void;
   isTimerActive: boolean;
+  activeTeam: TTeam | null;
 }
 
 export const Board: React.FC<IBoard> = ({
@@ -17,6 +19,7 @@ export const Board: React.FC<IBoard> = ({
   gameData,
   questions,
   timer,
+  activeTeam,
   isTimerActive,
   handleQuestionOpen,
   handleQuestionClose
@@ -35,6 +38,7 @@ export const Board: React.FC<IBoard> = ({
           key={category.uid}
           questions={questions}
           timer={timer}
+          activeTeam={activeTeam}
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}
           category={category}

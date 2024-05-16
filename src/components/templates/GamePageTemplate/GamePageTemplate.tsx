@@ -17,6 +17,7 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
     questions,
     gameConfig,
     isTimerActive,
+    activeTeam,
     handleQuestionOpen,
     handleQuestionClose,
     addPointsForTeam,
@@ -42,6 +43,7 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
           }
           isTimerActive={isTimerActive}
           questions={questions}
+          activeTeam={activeTeam}
           handleQuestionOpen={handleQuestionOpen}
           handleQuestionClose={handleQuestionClose}
         />
