@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
 
 import { Button } from '@/components/atoms';
+import { CountdownTimer } from '@/components/molecules';
 import { TPoints, TQuestion } from '@/types/game';
 import './Question.style.scss';
 
@@ -65,14 +66,17 @@ export const Question: React.FC<IQuestion> = ({
               onClick={() => handleClose()}>
               ESC
             </Button>
-            <p>{categoryTitle}</p>
+            <p>
+              {categoryTitle} - <b>{pointGroup ? pointGroup.label : ''}</b>
+            </p>
             <div className="ml-8 w-[60px]"></div>
           </div>
           <div
             className={
-              'jeopardy-question-container-content text-[4rem] font-bold mx-4'
+              'jeopardy-question-container-content text-[4rem] font-bold mx-4 flex flex-col gap-14'
             }>
-            {pointGroup ? pointGroup.label : ''}
+            <CountdownTimer />
+            <div>Team 1</div>
           </div>
         </div>
       ) : (

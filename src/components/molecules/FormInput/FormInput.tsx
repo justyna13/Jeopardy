@@ -6,7 +6,7 @@ import '@/components/molecules/FormInput/FormInput.scss';
 type InputProps = React.ComponentProps<typeof Input>;
 
 interface IFormInput extends InputProps {
-  label: string;
+  label?: string;
   validationSchema?: RegisterOptions | undefined;
 }
 

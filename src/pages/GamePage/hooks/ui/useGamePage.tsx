@@ -5,9 +5,22 @@ import { useGetGameData } from '@/pages/GamePage/hooks/services/useGetGameData.t
 import { GameActionTypes } from '@/store/GameProvider/GameActionTypes.ts';
 import { useGameContext } from '@/store/GameProvider/GameContext.ts';
 import { IMqttPublishQuestionPayload } from '@/types/api';
+import { IFormConfig } from '@/types/form';
 import { TPoints, TQuestion } from '@/types/game';
 
 export const useGamePage = () => {
+  const localStorageGameConfig: IFormConfig | undefined =
+    JSON.parse(localStorage.getItem('gameConfig')!) ?? undefined;
+  const [gameConfig, setGameConfig] = useState<IFormConfig>({
+    timer: localStorageGameConfig ? localStorageGameConfig.timer : '',
+    backendAddress: localStorageGameConfig
+      ? localStorageGameConfig.backendAddress
+      : '',
+    mqttAddress: localStorageGameConfig
+      ? localStorageGameConfig.mqttAddress
+      : ''
+  });
+
   const [activeQuestion, setActiveQuestion] = useState<TQuestion | null>();
   const [activePointGroup, setActivePointGroup] = useState<TPoints | null>();
   const { state, dispatch } = useGameContext();
@@ -21,20 +34,18 @@ export const useGamePage = () => {
   const [client, setClient] = useState<mqtt.MqttClient | null>(null);
 
   const connectToMqtt = (
-    host: string,
     mqttOption: mqtt.IClientOptions | undefined = undefined
   ) => {
-    setClient(mqtt.connect(host, mqttOption));
+    setClient(mqtt.connect(gameConfig.mqttAddress, mqttOption));
   };
 
   const mqttPub = (topic: string, payload: IMqttPublishQuestionPayload) => {
     if (!client) return;
-
     client.publish(topic, JSON.stringify(payload));
   };
 
   const startMqttConnection = () => {
-    connectToMqtt(import.meta.env.VITE_MQTT_SERVER_HOST);
+    connectToMqtt();
   };
   // end mqtt
 
@@ -53,6 +64,15 @@ export const useGamePage = () => {
       setQuestions(allQuestions);
     }
   }, [gameData]);
+
+  useEffect(() => {
+    if (localStorage.getItem('gameConfig')) {
+      const newGameConfig = JSON.parse(
+        localStorage.getItem('gameConfig') ?? ''
+      );
+      setGameConfig(newGameConfig);
+    }
+  }, []);
 
   const handleQuestionOpen = (question: TQuestion) => {
     if (!gameData) return;
@@ -125,11 +145,16 @@ export const useGamePage = () => {
     });
   };
 
+  useEffect(() => {
+    if (gameConfig && gameConfig.mqttAddress.length) {
+      startMqttConnection();
+    }
+  }, [gameConfig]);
+
   return {
     teams: state.teams,
     gameData,
     questions,
-    startMqttConnection,
     handleQuestionOpen,
     addPointsForTeam,
     removePointsForTeam,

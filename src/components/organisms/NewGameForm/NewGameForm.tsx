@@ -5,7 +5,7 @@ import { Button } from '@/components/atoms';
 import { FormInput } from '@/components/molecules/FormInput/FormInput.tsx';
 import { GameActionTypes } from '@/store/GameProvider/GameActionTypes.ts';
 import { useGameContext } from '@/store/GameProvider/GameContext.ts';
-import { IForm, TTeam } from '@/types/form';
+import { IForm, IFormConfig, TTeam } from '@/types/form';
 
 interface INewGameForm {
   handleGameStarted: () => void;
@@ -14,8 +14,21 @@ interface INewGameForm {
 export const NewGameForm: React.FC<INewGameForm> = ({
   handleGameStarted
 }: INewGameForm) => {
+  const localStorageGameConfig: IFormConfig | undefined =
+    JSON.parse(localStorage.getItem('gameConfig')!) ?? undefined;
   const [nextUid, setNextUid] = useState(2);
-  const methods = useForm<IForm>({ mode: 'onSubmit' });
+  const methods = useForm<IForm>({
+    mode: 'onSubmit',
+    defaultValues: {
+      timer: localStorageGameConfig ? localStorageGameConfig.timer : '',
+      backendAddress: localStorageGameConfig
+        ? localStorageGameConfig.backendAddress
+        : '',
+      mqttAddress: localStorageGameConfig
+        ? localStorageGameConfig.mqttAddress
+        : ''
+    }
+  });
   const { state, dispatch } = useGameContext();
   const teamsLimit = 8;
 
@@ -67,6 +80,15 @@ export const NewGameForm: React.FC<INewGameForm> = ({
       payload: { teams: updatedTeams }
     });
 
+    localStorage.setItem(
+      'gameConfig',
+      JSON.stringify({
+        mqttAddress: form.mqttAddress,
+        timer: form.timer,
+        backendAddress: form.backendAddress
+      })
+    );
+
     handleGameStarted();
   };
 
@@ -74,16 +96,47 @@ export const NewGameForm: React.FC<INewGameForm> = ({
     <div className="form-wrapper">
       <FormProvider {...methods}>
         <form
-          className="px-0 pt-6 mb-4 text-[#333]"
+          className="px-0 mb-4 text-[#333]"
           onSubmit={methods.handleSubmit(saveTeams)}
           noValidate>
+          <hr className="mb-4" />
+          <div className={'flex gap-8'}>
+            <div className={'w-1/4'}>
+              <FormInput
+                label="Adres serwera MQTT"
+                name="mqttAddress"
+                type="text"
+                validationSchema={{ required: 'Pole wymagane' }}
+              />
+            </div>
+            <div className={'w-1/4'}>
+              <FormInput
+                label="Adres backendu"
+                name="backendAddress"
+                type="text"
+                validationSchema={{ required: 'Pole wymagane' }}
+              />
+            </div>
+          </div>
+          <hr className="mb-4" />
+          <div className={'w-1/4'}>
+            <FormInput
+              label="Czas odpowiedzi na pytanie"
+              name="timer"
+              type="text"
+              validationSchema={{ required: 'Pole wymagane' }}
+            />
+          </div>
+          <hr className="mb-4" />
+          <label className="form-label block text-gray-700 text-sm font-bold mb-2">
+            Uczestnicy
+          </label>
           {state.teams.map((team) => (
             <div key={`team-${team.uid}`}>
               <div className={'flex items-end justify-between'}>
                 <div className={'w-1/2'}>
                   <FormInput
                     id={`${team.uid}-name`}
-                    label={`Nazwa grupy`}
                     name={`${team.uid}name`}
                     type="text"
                     validationSchema={{ required: 'Pole wymagane' }}

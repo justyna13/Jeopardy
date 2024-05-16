@@ -1,5 +1,4 @@
 import { PlusIcon, MinusIcon } from '@heroicons/react/24/solid';
-import { useEffect } from 'react';
 
 import { Board } from '@/components/organisms';
 import { useGamePage } from '@/pages/GamePage/hooks/ui/useGamePage.tsx';
@@ -19,13 +18,8 @@ export const GamePageTemplate: React.FC<IGamePageTemplate> = ({
     handleQuestionOpen,
     handleQuestionClose,
     addPointsForTeam,
-    startMqttConnection,
     removePointsForTeam
   } = useGamePage();
-
-  useEffect(() => {
-    startMqttConnection();
-  }, []);
 
   const handleCorrectAnswer = (teamUid: string) => {
     addPointsForTeam(teamUid);
