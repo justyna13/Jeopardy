@@ -11,7 +11,7 @@ interface IQuestion {
   point_groups: Array<TPoints>;
   categoryTitle: string;
   questions: Array<TQuestion & { active: boolean }>;
-  handleQuestionOpen: (question: TQuestion) => void;
+  handleQuestionOpen: (question: TQuestion, categoryTitle: string) => void;
   handleQuestionClose: () => void;
   handleSkipAnswer: () => void;
   timer: number;
@@ -47,7 +47,7 @@ export const Question: React.FC<IQuestion> = ({
     if (!isActive || open) return;
 
     setOpen(true);
-    handleQuestionOpen(data);
+    handleQuestionOpen(data, categoryTitle);
   };
 
   const handleClose = () => {

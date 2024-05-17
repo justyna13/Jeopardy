@@ -8,7 +8,7 @@ interface IBoard {
   timer: number;
   gameData: IGameData;
   questions: Array<TQuestion & { active: boolean }>;
-  handleQuestionOpen: (question: TQuestion) => void;
+  handleQuestionOpen: (question: TQuestion, categoryTitle: string) => void;
   handleSkipAnswer: () => void;
   handleQuestionClose: () => void;
   isTimerActive: boolean;

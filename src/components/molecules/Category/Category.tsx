@@ -7,7 +7,7 @@ interface ICategory {
   category: TCategory;
   point_groups: Array<TPoints>;
   questions: Array<TQuestion & { active: boolean }>;
-  handleQuestionOpen: (question: TQuestion) => void;
+  handleQuestionOpen: (question: TQuestion, categoryTitle: string) => void;
   handleSkipAnswer: () => void;
   handleQuestionClose: () => void;
   timer: number;

@@ -114,7 +114,7 @@ export const useGamePage = () => {
     });
   }, [client]);
 
-  const handleQuestionOpen = (question: TQuestion) => {
+  const handleQuestionOpen = (question: TQuestion, categoryTitle: string) => {
     if (!gameData) return;
 
     const activePointGroup = gameData.point_groups.find(
@@ -122,7 +122,7 @@ export const useGamePage = () => {
     );
 
     mqttPub('quiz/selected_question', {
-      category_title: activePointGroup?.label ?? '',
+      category_title: categoryTitle ?? '',
       question_content: question.content,
       points: activePointGroup?.value ?? 0,
       answer: question.answer
@@ -150,6 +150,17 @@ export const useGamePage = () => {
       args: {
         arm: false
       }
+    });
+
+    mqttPub('quiz/selected_team', {
+      team: null
+    });
+
+    mqttPub('quiz/selected_question', {
+      category_title: '',
+      question_content: '',
+      points: 0,
+      answer: ''
     });
   };
 

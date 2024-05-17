@@ -13,7 +13,7 @@ const initialState: IGameState = {
       name: '',
       uid: 'team-1',
       points: 0,
-      deviceUid: "0"
+      deviceUid: '0'
     }
   ]
 };
